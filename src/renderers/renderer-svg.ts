@@ -13,6 +13,8 @@ export const createRenderer: SvgRendererFactory = (
 		fillMode = 'active',
 	},
 ) => {
+	const drawingFragment = document.createDocumentFragment()
+	const serializer = new XMLSerializer()
 	const maxRows = Math.floor(height / cellDim)
 	const groupFillRanges = groupIndecesBy<number>(
 		eq(fillMode === 'inactive' ? 0 : 1),
@@ -43,9 +45,11 @@ export const createRenderer: SvgRendererFactory = (
 			}
 		}
 
-		svgElements.forEach(element => {
-			element.appendChild(rowFragment.cloneNode(true))
-		})
+		drawingFragment.appendChild(rowFragment)
+
+		// svgElements.forEach(element => {
+		// 	element.appendChild(rowFragment.cloneNode(true))
+		// })
 	}
 
 	svgElements.forEach(element => {
@@ -61,5 +65,9 @@ export const createRenderer: SvgRendererFactory = (
 		for (let i = startIdx; i < state.length; i++) {
 			drawRow(state[i], height - (state.length - i) * cellDim)
 		}
+
+		const fragmentString = serializer.serializeToString(drawingFragment)
+
+		svgElements.forEach(element => void (element.innerHTML = fragmentString))
 	}
 }

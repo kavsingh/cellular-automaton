@@ -22,14 +22,10 @@ const main: BootFn = ({
 	}
 
 	const thumbnails = addRuleThumbnails(state.rules, thumbnailsContainer)
-	const { render: renderWorld } = createWorldsForType(
-		'canvas2d',
-		worldsContainer,
-		{
-			count: worldCount,
-			rendererOptions: { cellDim, width: worldDim, height: worldDim },
-		},
-	)
+	const { render: renderWorld } = createWorldsForType('svg', worldsContainer, {
+		count: worldCount,
+		rendererOptions: { cellDim, width: worldDim, height: worldDim },
+	})
 
 	thumbnails.forEach(({ element, evolver }) => {
 		element.addEventListener('click', () => void (state.evolver = evolver))
