@@ -79,7 +79,7 @@ const Scrolls: Component = () => {
 	buttonsContainer.appendChild(audioButton.el)
 
 	const { render: renderWorld } = createWorldsForType(
-		"canvas2d",
+		"webgl2",
 		worldsContainer,
 		{
 			count: worldCount,

@@ -2,6 +2,7 @@
 
 import { defineConfig } from "vite"
 import checkerPlugin from "vite-plugin-checker"
+import glslPlugin from "vite-plugin-glsl"
 import { createHtmlPlugin } from "vite-plugin-html"
 import { viteSingleFile } from "vite-plugin-singlefile"
 import tsConfigPaths from "vite-tsconfig-paths"
@@ -12,6 +13,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		plugins: [
 			tsConfigPaths(),
+			glslPlugin(),
 			checker(mode),
 			viteSingleFile(),
 			createHtmlPlugin(),
